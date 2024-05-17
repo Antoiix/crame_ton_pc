@@ -18,4 +18,8 @@
     #include <math.h>
     #include <SFML/Audio.h>
 
+void create_flamingo(sfRenderWindow *window, sfClock *clock, sfTexture *texture);
+void create_flamingo_crying(sfRenderWindow *window, sfClock *clock, sfTexture *texture);
+void flamingo_talking(sfRenderWindow *window);
+
 #endif //B_MUL_100_LIL_1_1_MYRADAR_MARTIN_DELANGUE_MY_H
