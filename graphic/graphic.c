@@ -38,11 +38,11 @@ int main()
     sfVideoMode mode = {800, 600, 32};
     sfRenderWindow *window = sfRenderWindow_create(mode, "Flamingo Display", sfResize | sfClose, NULL);
     if (!window)
-        return 1;
+        return 84;
     sfTexture *flamingo_texture = sfTexture_createFromFile("flamingo/flamingo_standing.png", NULL);
     sfTexture *flamingo_crying = sfTexture_createFromFile("flamingo/flamingo_death.png", NULL);
-    if (!flamingo_texture)
-        return 1;
+    if (!flamingo_texture || !flamingo_crying)
+        return 84;
     sfClock *clock = sfClock_create();
     create_all_buttons(button_creator);
     while (sfRenderWindow_isOpen(window)) {
@@ -52,6 +52,14 @@ int main()
                 sfRenderWindow_close(window);
             handle_event(&event, button_creator, window, &game);
         }
+        if (game == 1) {
+            sfTexture_destroy(flamingo_texture);
+            sfTexture_destroy(flamingo_crying);
+            sfClock_destroy(clock);
+            sfRenderWindow_destroy(window);
+            game_window();
+            return 0;
+        }
         sfRenderWindow_clear(window, sfBlack);
         create_flamingo(window, clock, flamingo_texture);
         create_flamingo_crying(window, clock, flamingo_crying);
@@ -59,6 +67,7 @@ int main()
         draw_button(button_creator, window);
         sfRenderWindow_display(window);
     }
+    sfTexture_destroy(flamingo_crying);
     sfTexture_destroy(flamingo_texture);
     sfClock_destroy(clock);
     sfRenderWindow_destroy(window);
