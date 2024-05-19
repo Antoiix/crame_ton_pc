@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -I./include -g
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ)
+	gcc -o $(NAME) $(OBJ) -lcsfml-graphics -lcsfml-window -lcsfml-system
 
 obj/%.o: src/%.c
 	mkdir -p $(dir $@)
