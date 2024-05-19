@@ -1,0 +1,18 @@
+/*
+** EPITECH PROJECT, 2024
+** crame_ton_pc
+** File description:
+** one_malloc.c
+*/
+
+#include "my.h"
+
+int one_malloc(node_t **list)
+{
+    int size = 200;
+
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    return 0;
+}
