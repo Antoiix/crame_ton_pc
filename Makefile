@@ -28,19 +28,8 @@ obj/%.o: src/%.c
 
 clean:
 	rm -rf obj
-	rm -f unit_tests
-	rm -f *.gcdo
-	rm -f *.gcda
-	rm -f *.gcno
 
 fclean: clean
 	rm -f $(NAME)
-
-tests_run: all
-	gcc -o unit_tests $(SRC_NO_MAIN) $(SRC_TESTS) \
-		--coverage -lcriterion $(CFLAGS)
-	./unit_tests
-	gcovr --exclude tests/
-	gcovr --exclude tests/ --branches
 
 re: clean fclean all
