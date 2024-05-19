@@ -41,7 +41,8 @@ void flamingo_talking(sfRenderWindow *window);
 
 int create_all_buttons(creator_t *button_creator);
 creator_t *init_button(void);
-
 void draw_button(creator_t *button_creator, sfRenderWindow *window);
+
+int game_window(void);
 
 #endif //B_MUL_100_LIL_1_1_MYRADAR_MARTIN_DELANGUE_MY_H
