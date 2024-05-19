@@ -59,8 +59,8 @@ void create_and_add_button(creator_t *button_creator,
         return;
     }
     sfTexture *texture = sfTexture_createFromFile("flamingo/play.jpg", NULL);
-    if(!texture)
-        return 84;
+    if (!texture)
+        return;
     new_button->rect = sfRectangleShape_create();
     new_button->is_clicked = is_button_clicked;
     new_button->is_hover = is_button_hover;
