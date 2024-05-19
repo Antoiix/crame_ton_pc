@@ -8,8 +8,28 @@
 #include "include/graphic.h"
 #include <SFML/Graphics.h>
 
+void handle_event(sfEvent *event, creator_t *button_creator)
+{
+    if (event->type == sfEvtMouseButtonPressed) {
+        for (int i = 0; i < button_creator->count; i++) {
+            if (button_creator->button[i]->is_clicked(button_creator->button[i], event->mouseButton))
+                printf("Martin est gay\n");
+        }
+    }
+    if (event->type == sfEvtMouseMoved) {
+        for (int i = 0; i < button_creator->count; i++) {
+            if (button_creator->button[i]->is_hover(button_creator->button[i], event->mouseMove))
+                sfRectangleShape_setFillColor(button_creator->button[i]->rect, sfRed);
+            else
+                sfRectangleShape_setFillColor(button_creator->button[i]->rect, sfWhite);
+        }
+
+    }
+}
+
 int main()
 {
+    creator_t *button_creator = init_button();
     sfVideoMode mode = {800, 600, 32};
     sfRenderWindow *window = sfRenderWindow_create(mode, "Flamingo Display", sfResize | sfClose, NULL);
     if (!window)
@@ -19,16 +39,19 @@ int main()
     if (!flamingo_texture)
         return 1;
     sfClock *clock = sfClock_create();
+    create_all_buttons(button_creator);
     while (sfRenderWindow_isOpen(window)) {
         sfEvent event;
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
+            handle_event(&event, button_creator);
         }
         sfRenderWindow_clear(window, sfBlack);
         create_flamingo(window, clock, flamingo_texture);
         create_flamingo_crying(window, clock, flamingo_crying);
         flamingo_talking(window);
+        draw_button(button_creator, window);
         sfRenderWindow_display(window);
     }
     sfTexture_destroy(flamingo_texture);
