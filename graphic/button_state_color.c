@@ -59,6 +59,7 @@ void create_and_add_button(creator_t *button_creator,
         return;
     }
     sfTexture *texture = sfTexture_createFromFile("graphic/flamingo/play.jpg", NULL);
+
     if (!texture)
         return;
     new_button->rect = sfRectangleShape_create();

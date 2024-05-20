@@ -71,7 +71,7 @@ void flamingo_talking_two(sfRenderWindow *window)
     sfRenderWindow_drawText(window, text, NULL);
     sfFont_destroy(font);
     sfText_destroy(text);
-
 }
+
 
 

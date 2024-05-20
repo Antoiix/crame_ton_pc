@@ -17,18 +17,7 @@
     #include <fcntl.h>
     #include <math.h>
     #include <SFML/Audio.h>
-    #include "../../include/my.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/sysinfo.h>
-#include <SFML/Graphics.h>
-#include <SFML/System/Sleep.h>
-#include <time.h>
-#include <fcntl.h>
-#include <math.h>
-#include <SFML/Audio.h>
+    #include <sys/sysinfo.h>
 
 
 #define MAX 20
@@ -46,6 +35,7 @@ typedef struct creator_t {
     button_s *button[MAX];
     int count;
 } creator_t;
+
 
 int gamee(sfRenderWindow *window);
 

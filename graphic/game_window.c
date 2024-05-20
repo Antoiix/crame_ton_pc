@@ -7,6 +7,7 @@
 
 #include "include/graphic.h"
 
+
 int game_window(void)
 {
     sfVideoMode mode = {1920, 1080, 32};

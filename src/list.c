@@ -11,7 +11,6 @@ node_t *init_node_program(long long size)
 {
     node_t *tmp = malloc(sizeof(node_t));
 
-
     tmp->val = malloc(sizeof(char) * (size + 1));
     tmp->next = NULL;
     if (!tmp->val) {
