@@ -35,6 +35,7 @@ typedef struct creator_t {
     int count;
 } creator_t;
 
+int gamee(sfRenderWindow *window);
 
 void create_flamingo(sfRenderWindow *window, sfClock *clock, sfTexture *texture);
 void create_flamingo_crying(sfRenderWindow *window, sfClock *clock, sfTexture *texture);

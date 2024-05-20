@@ -5,6 +5,7 @@
 ** game.c
 */
 
+#include "include/graphic.h"
 #include <SFML/Graphics.h>
 #include <SFML/System.h>
 #include <stdlib.h>
@@ -48,14 +49,36 @@ int isPointInsideRectangle(sfVector2f point, sfRectangleShape *rectangle)
             point.y >= position.y && point.y <= position.y + size.y);
 }
 
-int game(void)
+void display_win_message(sfRenderWindow *window) {
+    sfFont *font = sfFont_createFromFile("graphic/flamingo/fire.ttf");
+    if (!font) {
+        return;
+    }
+    sfText *text = sfText_create();
+    sfText_setString(text, "You WIN !");
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 50);
+    sfText_setColor(text, sfWhite);
+
+    sfFloatRect textRect = sfText_getLocalBounds(text);
+    sfVector2u windowSize = sfRenderWindow_getSize(window);
+    sfText_setPosition(text, (sfVector2f){(windowSize.x - textRect.width) / 2, (windowSize.y - textRect.height) / 2});
+
+    sfRenderWindow_clear(window, sfBlack);
+    sfRenderWindow_drawText(window, text, NULL);
+    sfRenderWindow_display(window);
+    sfSleep(sfSeconds(2));
+
+    sfText_destroy(text);
+    sfFont_destroy(font);
+}
+
+int gamee(sfRenderWindow *window)
 {
     srand(time(NULL));
-    sfRenderWindow* window;
-    sfVideoMode videoMode = {1920, 1080, 32};
-    window = sfRenderWindow_create(videoMode, "ça crame la ?", sfResize | sfClose, NULL);
     sfRectangleShape *squares[10000];
     size_t count = 0;
+    int nb = 0;
     sfClock *clock = sfClock_create();
     sfTime timeSinceLastSquare = sfClock_getElapsedTime(clock);
 
@@ -69,7 +92,8 @@ int game(void)
                 for (size_t i = 0; i < count; i++) {
                     if (isPointInsideRectangle(mousePosition, squares[i])) {
                         sfRectangleShape_destroy(squares[i]);
-                        printf("touché\n");
+                        nb++;
+                        printf("touché %d\n", nb);
                         squares[i] = squares[count - 1];
                         count--;
                         break;
@@ -81,6 +105,10 @@ int game(void)
             count = addRandomSquare(squares, count);
             sfClock_restart(clock);
         }
+        if (nb >= 25) {
+            display_win_message(window);
+            break;
+        }
         timeSinceLastSquare = sfClock_getElapsedTime(clock);
         sfRenderWindow_clear(window, sfBlack);
         for (size_t i = 0; i < count; i++) {
@@ -91,7 +119,6 @@ int game(void)
     for (size_t i = 0; i < count; i++) {
         sfRectangleShape_destroy(squares[i]);
     }
-    sfRenderWindow_destroy(window);
     sfClock_destroy(clock);
     return 0;
 }

@@ -58,14 +58,8 @@ int main()
             handle_event(&event, button_creator, window, &game);
         }
         if (game == 1) {
-            sfSprite_destroy(sprite);
-            sfTexture_destroy(background);
-            sfTexture_destroy(flamingo_texture);
-            sfTexture_destroy(flamingo_crying);
-            sfClock_destroy(clock);
-            sfRenderWindow_destroy(window);
-            game_window();
-            return 0;
+            gamee(window);
+            game = 0;
         }
         sfRenderWindow_clear(window, sfBlack);
         sfRenderWindow_drawSprite(window, sprite, NULL);
