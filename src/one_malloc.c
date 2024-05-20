@@ -9,8 +9,41 @@
 
 int one_malloc(node_t **list)
 {
-    int size = 200;
+    int size = 2000000;
 
+
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
+    if (add_node_program(list, size) == 84) {
+        return 84;
+    }
     if (add_node_program(list, size) == 84) {
         return 84;
     }

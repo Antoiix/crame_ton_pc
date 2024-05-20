@@ -17,6 +17,8 @@
     #include <fcntl.h>
     #include <math.h>
     #include <SFML/Audio.h>
+    #include <sys/sysinfo.h>
+
 
 #define MAX 20
 
@@ -35,6 +37,8 @@ typedef struct creator_t {
 } creator_t;
 
 
+int gamee(sfRenderWindow *window);
+
 void create_flamingo(sfRenderWindow *window, sfClock *clock, sfTexture *texture);
 void create_flamingo_crying(sfRenderWindow *window, sfClock *clock, sfTexture *texture);
 void flamingo_talking(sfRenderWindow *window);
@@ -44,5 +48,6 @@ creator_t *init_button(void);
 void draw_button(creator_t *button_creator, sfRenderWindow *window);
 
 int game_window(void);
+void flamingo_talking_two(sfRenderWindow *window);
 
 #endif //B_MUL_100_LIL_1_1_MYRADAR_MARTIN_DELANGUE_MY_H

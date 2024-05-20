@@ -58,7 +58,8 @@ void create_and_add_button(creator_t *button_creator,
     if (!new_button) {
         return;
     }
-    sfTexture *texture = sfTexture_createFromFile("flamingo/play.jpg", NULL);
+    sfTexture *texture = sfTexture_createFromFile("graphic/flamingo/play.jpg", NULL);
+
     if (!texture)
         return;
     new_button->rect = sfRectangleShape_create();
@@ -78,6 +79,6 @@ void create_and_add_button(creator_t *button_creator,
 int create_all_buttons(creator_t *button_creator)
 {
     create_and_add_button(button_creator,
-                          (sfVector2f){200, 80}, (sfVector2f){500, 100});
+                          (sfVector2f){700, 80}, (sfVector2f){500, 100});
     return 0;
 }

@@ -20,8 +20,8 @@ void create_flamingo(sfRenderWindow *window, sfClock *clock, sfTexture *texture)
     sfSprite *sprite = sfSprite_create();
     sfSprite_setTexture(sprite, texture, sfTrue);
     sfSprite_setTextureRect(sprite, frame_rect);
-    sfSprite_setPosition(sprite, (sfVector2f){200, 250});
-    sfSprite_setScale(sprite, (sfVector2f){5.5f, 5.5f});
+    sfSprite_setPosition(sprite, (sfVector2f){800, 550});
+    sfSprite_setScale(sprite, (sfVector2f){10.0f, 10.0f});
     sfRenderWindow_drawSprite(window, sprite, NULL);
     sfSprite_destroy(sprite);
 }
@@ -48,16 +48,30 @@ void create_flamingo_crying(sfRenderWindow *window, sfClock *clock, sfTexture *t
 void flamingo_talking(sfRenderWindow *window)
 {
     sfText *text = sfText_create();
-    sfFont *font = sfFont_createFromFile("flamingo/fire.ttf");
+    sfFont *font = sfFont_createFromFile("graphic/flamingo/fire.ttf");
     sfText_setString(text, "Buenos dias, Putas\nsi tu veux faire flamber ton pc...\nclique sur jouer !");
     sfText_setColor(text, sfWhite);
     sfText_setFont(text, font);
-    sfText_setCharacterSize(text, 20);
-    sfText_setPosition(text, (sfVector2f){200, 200});
+    sfText_setCharacterSize(text, 50);
+    sfText_setPosition(text, (sfVector2f){500, 450});
     sfRenderWindow_drawText(window, text, NULL);
     sfFont_destroy(font);
     sfText_destroy(text);
 
 }
+void flamingo_talking_two(sfRenderWindow *window)
+{
+    sfText *text = sfText_create();
+    sfFont *font = sfFont_createFromFile("graphic/flamingo/fire.ttf");
+    sfText_setString(text, "Buenos dias, Putas\npour ne pas faire flamber ton pc\nclique sur les carres !");
+    sfText_setColor(text, sfWhite);
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 50);
+    sfText_setPosition(text, (sfVector2f){500, 450});
+    sfRenderWindow_drawText(window, text, NULL);
+    sfFont_destroy(font);
+    sfText_destroy(text);
+}
+
 
 

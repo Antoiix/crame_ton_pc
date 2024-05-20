@@ -24,7 +24,10 @@ typedef struct node_s {
     struct node_s *next;
 } node_t;
 
+void clear_list(node_t *head);
 int add_node_program(node_t **list, long long size);
 int one_malloc(node_t **mem);
 void my_free(node_t **list, int n);
+int malloc_fonction(void);
+
 #endif

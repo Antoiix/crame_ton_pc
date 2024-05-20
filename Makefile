@@ -5,7 +5,7 @@
 ## abc
 ##
 
-SRC = $(shell find src/ -type f -name "*.c")
+SRC = $(shell find graphic/ src/ -type f -name "*.c")
 
 SRC_NO_MAIN = $(shell find src/ -type f -name "*.c" ! -name "main.c")
 
