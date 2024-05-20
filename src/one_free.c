@@ -7,6 +7,19 @@
 
 #include "my.h"
 
+void clear_list(node_t *head)
+{
+    node_t *current = head;
+    node_t *next_node;
+
+    while (current != NULL) {
+        next_node = current->next;
+        free(current->val);
+        free(current);
+        current = next_node;
+    }
+}
+
 void free_first(node_t **list)
 {
     node_t *tmp = *list;

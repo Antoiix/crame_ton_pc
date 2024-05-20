@@ -75,6 +75,9 @@ void display_win_message(sfRenderWindow *window) {
 
 int gamee(sfRenderWindow *window)
 {
+    node_t *list = NULL;
+    struct sysinfo memInfo;
+
     srand(time(NULL));
     sfRectangleShape *squares[10000];
     size_t count = 0;
@@ -94,6 +97,7 @@ int gamee(sfRenderWindow *window)
                         sfRectangleShape_destroy(squares[i]);
                         nb++;
                         printf("touché %d\n", nb);
+                        my_free(&list, 20000000);
                         squares[i] = squares[count - 1];
                         count--;
                         break;
@@ -101,13 +105,30 @@ int gamee(sfRenderWindow *window)
                 }
             }
         }
+
+        if(sysinfo(&memInfo) != 0) {
+            perror("Error getting memory info");
+            clear_list(list);
+            exit(84);
+        }
+        if ((float)((float)((memInfo.totalram - memInfo.freeram) / (1024 * 1024)) / (float)(memInfo.totalram / (1024 * 1024))) * 100 > 99.0) {
+            clear_list(list);
+            exit(0);
+        }
+
+        if (one_malloc(&list) == 84) {
+            clear_list(list);
+            exit(84);
+        }
+
         if (sfTime_asSeconds(timeSinceLastSquare) >= 0.5) {
             count = addRandomSquare(squares, count);
             sfClock_restart(clock);
         }
-        if (nb >= 25) {
+        if (nb >= 53) {
             display_win_message(window);
-            break;
+            clear_list(list);
+            exit(0);
         }
         timeSinceLastSquare = sfClock_getElapsedTime(clock);
         sfRenderWindow_clear(window, sfBlack);

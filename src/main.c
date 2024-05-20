@@ -15,8 +15,6 @@ int malloc_fonction(void)
     sfClock *clock = sfClock_create();
 
     while (1) {
-        time = sfClock_getElapsedTime(clock);
-        if (time.microseconds > 1.0) {
             if(sysinfo(&memInfo) != 0) {
                 perror("Error getting memory info");
                 return 84;
@@ -27,8 +25,6 @@ int malloc_fonction(void)
             if (one_malloc(&list) == 84) {
                 return 84;
             }
-            sfClock_restart(clock);
-        }
     }
     return 0;
 }

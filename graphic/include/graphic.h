@@ -18,6 +18,18 @@
     #include <math.h>
     #include <SFML/Audio.h>
     #include "../../include/my.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/sysinfo.h>
+#include <SFML/Graphics.h>
+#include <SFML/System/Sleep.h>
+#include <time.h>
+#include <fcntl.h>
+#include <math.h>
+#include <SFML/Audio.h>
+
 
 #define MAX 20
 
