@@ -18,6 +18,7 @@
     #include <math.h>
     #include <SFML/Audio.h>
     #include <sys/sysinfo.h>
+    #include "../../include/my.h"
 
 
 #define MAX 20
