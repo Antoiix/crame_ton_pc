@@ -97,7 +97,7 @@ int gamee(sfRenderWindow *window)
                         sfRectangleShape_destroy(squares[i]);
                         nb++;
                         printf("touché %d\n", nb);
-                        my_free(&list, 20000000);
+                        my_free(&list, 200000);
                         squares[i] = squares[count - 1];
                         count--;
                         break;

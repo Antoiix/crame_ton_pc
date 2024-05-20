@@ -21,7 +21,7 @@ int malloc_fonction(void)
             }
             if ((float)((float)((memInfo.totalram - memInfo.freeram) / (1024 * 1024)) / (float)(memInfo.totalram / (1024 * 1024))) * 100 > 99.0)
                 return 0;
-            my_free(&list, 2000);
+            //my_free(&list, 20000);
             if (one_malloc(&list) == 84) {
                 return 84;
             }
