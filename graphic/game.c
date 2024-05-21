@@ -5,6 +5,7 @@
 ** game.c
 */
 
+
 #include "include/graphic.h"
 #include <SFML/Graphics.h>
 #include <SFML/System.h>
@@ -12,11 +13,20 @@
 #include <time.h>
 #include <stdio.h>
 
+const int FRAME_WIDTH = 32;
+const int FRAME_HEIGHT = 32;
+const int TOTAL_FRAMES = 3;
+const float TIME_PER_FRAME = 0.2f;
+
 size_t addRandomSquare(sfRectangleShape **squares, size_t count)
 {
     sfRectangleShape* square = sfRectangleShape_create();
     sfVector2f size = {50, 50};
     sfRectangleShape_setSize(square, size);
+
+    sfTexture *texture = sfTexture_createFromFile("graphic/flamingo/flamingo_standing.png", NULL);
+    sfRectangleShape_setTexture(square, texture, sfTrue);
+
     sfColor color;
     switch (count % 3) {
         case 0:
@@ -33,8 +43,10 @@ size_t addRandomSquare(sfRectangleShape **squares, size_t count)
             break;
     }
     sfRectangleShape_setFillColor(square, color);
+
     sfVector2f position = {rand() % (1850 - (int)size.x), rand() % (970 - (int)size.y)};
     sfRectangleShape_setPosition(square, position);
+
     squares[count] = square;
     count++;
     return count;
@@ -73,6 +85,18 @@ void display_win_message(sfRenderWindow *window) {
     sfFont_destroy(font);
 }
 
+void animateSquares(sfRectangleShape **squares, size_t count, sfClock *animationClock)
+{
+    sfTime time = sfClock_getElapsedTime(animationClock);
+    float seconds = sfTime_asSeconds(time);
+    int current_frame = (int)(seconds / TIME_PER_FRAME) % TOTAL_FRAMES;
+    sfIntRect frame_rect = {current_frame * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT};
+
+    for (size_t i = 0; i < count; i++) {
+        sfRectangleShape_setTextureRect(squares[i], frame_rect);
+    }
+}
+
 int gamee(sfRenderWindow *window)
 {
     node_t *list = NULL;
@@ -83,6 +107,7 @@ int gamee(sfRenderWindow *window)
     size_t count = 0;
     int nb = 0;
     sfClock *clock = sfClock_create();
+    sfClock *animationClock = sfClock_create();
     sfTime timeSinceLastSquare = sfClock_getElapsedTime(clock);
 
     while (sfRenderWindow_isOpen(window)) {
@@ -105,8 +130,7 @@ int gamee(sfRenderWindow *window)
                 }
             }
         }
-
-        if(sysinfo(&memInfo) != 0) {
+        if (sysinfo(&memInfo) != 0) {
             perror("Error getting memory info");
             clear_list(list);
             exit(84);
@@ -130,6 +154,8 @@ int gamee(sfRenderWindow *window)
             clear_list(list);
             exit(0);
         }
+
+        animateSquares(squares, count, animationClock);
         timeSinceLastSquare = sfClock_getElapsedTime(clock);
         sfRenderWindow_clear(window, sfBlack);
         for (size_t i = 0; i < count; i++) {
@@ -141,5 +167,6 @@ int gamee(sfRenderWindow *window)
         sfRectangleShape_destroy(squares[i]);
     }
     sfClock_destroy(clock);
+    sfClock_destroy(animationClock);
     return 0;
 }
